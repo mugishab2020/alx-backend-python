@@ -4,11 +4,11 @@
 from typing import Union, TypeVar, Optional, Mapping, Any
 
 
-M= TypeVar('M')
+T= TypeVar('T')
 
 
 def safely_get_value(dct: Mapping, key: Any,
-                     default: Optional[M] = None) -> Union[Any, M]:
+                     default: Optional[T] = None) -> Union[Any, T]:
 
    
     if key in dct:

@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-''' this si to use asyncio.as-complited method'''
-
-
+''' The basics of async
+'''
 from typing import List
 import asyncio
 
-new_wait = __import__('0-basic_async_syntax').wait_random
+
+wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> float:
-    '''We are taking the max_delay and n as arguments
-    and spawn wait_random n times'''
-    a = [new_wait(max_delay) for _ in range(n)]
-    return [await a for a in asyncio.as_completed(a)]
+async def wait_n(n: int, max_delay: int) -> List[float]:
+    '''takes in n and max_delay and
+       spawn task_wait_random n times with the
+       specified max_delay
+    '''
+    delays = [wait_random(max_delay) for _ in range(n)]
+    completed_delays = []
+    for coro in asyncio.as_completed(delays):
+        completed_delays.append(await coro)
+    return completed_delays

@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
-''' The basics of async
 '''
-from typing import List
+returnog the time takne to run
+'''
+import time
 import asyncio
 
 
-wait_random = __import__('0-basic_async_syntax').wait_random
+wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
-async def wait_n(n: int, max_delay: int) -> List[float]:
-    '''takes in n and max_delay and
-       spawn task_wait_random n times with the
-       specified max_delay
+def measure_time(n: int, max_delay: int) -> float:
+    '''taking the max_delay and n to retun the
+    runtime of wait_n
     '''
-    delays = [wait_random(max_delay) for _ in range(n)]
-    completed_delays = []
-    for coro in asyncio.as_completed(delays):
-        completed_delays.append(await coro)
-    return completed_delays
+    a = time.perf_counter()
+    asyncio.run(wait_n(n, max_delay))
+    delay = (time.perf_counter() - a) / n
+    return delay

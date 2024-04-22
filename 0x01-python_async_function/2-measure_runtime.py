@@ -1,4 +1,5 @@
 #!/usr/bin/env/python3
+'''This is for using the  time package'''
 
 
 import time
